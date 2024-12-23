@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .myText {
+            font-weight: 100;
+            font-size: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+        }
+        button.disable {
+            background-color: #949494; /* Disabled button background */
+            cursor: not-allowed;      /* Change cursor for disabled button */
+        }
+        button:hover:not(.disable) {
+            background-color: #45a049; /* Hover effect only for enabled buttons */
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p class="myText" id="myText">Font size: 10px</p>
+    </div>
+    <div>
+        <button name="btnIncrease" id="btnIncrease">+</button>
+        <button name="btnDecrease" id="btnDecrease">-</button>
+    </div>
+    <script>
+        const textElement = document.getElementById("myText");
+        const btnDecrease = document.getElementById("btnDecrease");
+        const btnIncrease = document.getElementById("btnIncrease");
+        let currentFontSize = 10; // Initial font size in px
+
+        // Initialize button state
+        updateButtonState();
+
+        btnIncrease.addEventListener("click", () => {
+            currentFontSize++; // Increase font size
+            updateTextAndStyle();
+        });
+
+        btnDecrease.addEventListener("click", () => {
+            if (currentFontSize > 10) {
+                currentFontSize--; // Decrease font size
+                updateTextAndStyle();
+            }
+        });
+
+        // Function to update font size and text
+        function updateTextAndStyle() {
+            textElement.style.fontSize = `${currentFontSize}px`;
+            textElement.textContent = `Font size: ${currentFontSize}px`;
+            updateButtonState();
+        }
+
+        // Function to enable or disable the "Decrease" button
+        function updateButtonState() {
+            if (currentFontSize <= 10) {
+                btnDecrease.disabled = true;
+                btnDecrease.classList.add("disable");
+            } else {
+                btnDecrease.disabled = false;
+                btnDecrease.classList.remove("disable");
+            }
+        }
+    </script>
+</body>
+</html>
