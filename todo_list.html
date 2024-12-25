@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create and Remove Boxes</title>
+    <style>
+        .box {
+            padding: 10px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f9f9f9;
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 150px;
+        }
+
+        button{
+            padding: 10px;
+            border-radius: 10px;
+            background-color: red;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Todo List App</h1>
+        <input type="text" id="nameInput" placeholder="Enter a new Item"> <br>
+        <button onclick="createBox()" style="background-color: aquamarine;">Item Add</button>
+        <div id="boxContainer"></div>
+    </div>
+
+    <script>
+        function createBox() {
+            const name = document.getElementById('nameInput').value;
+            if (name.trim() === '') {
+                alert('សូមបញ្ជូលឈ្មោះ Please enter a box');
+                return;
+            }
+
+            const boxContainer = document.getElementById('boxContainer');
+
+            // Create the box element
+            const box = document.createElement('div');
+            box.className = 'box';
+
+            // Create the name text
+            const nameText = document.createElement('span');
+            nameText.textContent = name;
+
+            // Create the remove button
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'Remove';
+            removeButton.onclick = function () {
+                boxContainer.removeChild(box);
+            };
+
+            // Append name and button to the box
+            box.appendChild(nameText);
+            box.appendChild(removeButton);
+
+            // Append the box to the container
+            boxContainer.appendChild(box);
+
+            // Clear the input field
+            document.getElementById('nameInput').value = '';
+        }
+    </script>
+</body>
+</html>
